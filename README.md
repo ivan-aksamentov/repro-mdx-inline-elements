@@ -153,6 +153,7 @@ You can find the results in [`compare/`](https://github.com/ivan-aksamentov/repr
 
 I was not able to make sense of the diff yet.
 
+
 Unrelated to diff, but interestingly, the reason `LinkExternal` works seems to be the fact that it uses (renders) `children` props. Adding `children` to `H1` component also fixes the `h1` rendering. So props seems to be influencing the code optimizations in question. However, side effects, like `console.log()` don't seem to be preserved (notice how they are not printed during build) Sadly, this workaround will not work for styled components. 
 
 
@@ -169,3 +170,27 @@ There is also a similarly useful plugin, [@babel/plugin-transform-react-constant
  - remove [`@babel/plugin-transform-react-inline-elements`](https://babeljs.io/docs/en/babel-plugin-transform-react-inline-elements), paying extra runtime performance and bundle size cost.
 
  - use `children` prop in custom components - does not work for many components, like styled-components, or components that are not meant to have children.
+
+
+### Update:
+
+Perhaps webstorm's diff is a bit more readable:
+
+<a href="https://user-images.githubusercontent.com/9403403/98888586-8c281c80-2498-11eb-93f9-d820a16cb77e.png" target="_blank">
+	<img width="200px" src="https://user-images.githubusercontent.com/9403403/98888586-8c281c80-2498-11eb-93f9-d820a16cb77e.png">
+<a>
+
+<a href="https://user-images.githubusercontent.com/9403403/98888593-8df1e000-2498-11eb-8d57-7b5f904b6c53.png" target="_blank">
+	<img width="200px" src="https://user-images.githubusercontent.com/9403403/98888593-8df1e000-2498-11eb-8d57-7b5f904b6c53.png">
+<a>
+
+<a href="https://user-images.githubusercontent.com/9403403/98888595-8fbba380-2498-11eb-9bf4-9bcd8881ce6b.png" target="_blank">
+	<img width="200px" src="https://user-images.githubusercontent.com/9403403/98888595-8fbba380-2498-11eb-9bf4-9bcd8881ce6b.png">
+<a>
+
+Looks like something is going on with this added function, as well as with `null` and `void 0` arguments on call site. Still cannot tell what's wrong. For example, `console.log()` calls are present in H1 on both sides, but are not working on the right side, while working on the left side.
+
+
+### Update 2:
+
+It may make more sense to examine the output of the normal `next build` in `.next/static/chunks` (rather than of static export).
