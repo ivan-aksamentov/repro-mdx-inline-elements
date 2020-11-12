@@ -1,0 +1,126 @@
+--- compare/good/pages/index.js	2020-11-12 03:15:01.834545361 +0100
++++ compare/bad/pages/index.js	2020-11-12 03:16:00.891791800 +0100
+@@ -972,6 +972,53 @@
+ // EXPORTS
+ __webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ Index; });
+ 
++// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/jsx.js
++var REACT_ELEMENT_TYPE;
++function _createRawReactElement(type, props, key, children) {
++  if (!REACT_ELEMENT_TYPE) {
++    REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol["for"] && Symbol["for"]("react.element") || 0xeac7;
++  }
++
++  var defaultProps = type && type.defaultProps;
++  var childrenLength = arguments.length - 3;
++
++  if (!props && childrenLength !== 0) {
++    props = {
++      children: void 0
++    };
++  }
++
++  if (childrenLength === 1) {
++    props.children = children;
++  } else if (childrenLength > 1) {
++    var childArray = new Array(childrenLength);
++
++    for (var i = 0; i < childrenLength; i++) {
++      childArray[i] = arguments[i + 3];
++    }
++
++    props.children = childArray;
++  }
++
++  if (props && defaultProps) {
++    for (var propName in defaultProps) {
++      if (props[propName] === void 0) {
++        props[propName] = defaultProps[propName];
++      }
++    }
++  } else if (!props) {
++    props = defaultProps || {};
++  }
++
++  return {
++    $$typeof: REACT_ELEMENT_TYPE,
++    type: type,
++    key: key === undefined ? null : '' + key,
++    ref: null,
++    props: props,
++    _owner: null
++  };
++}
+ // EXTERNAL MODULE: ./node_modules/react/index.js
+ var react = __webpack_require__("q1tI");
+ var react_default = /*#__PURE__*/__webpack_require__.n(react);
+@@ -1236,11 +1283,12 @@
+ 
+ 
+ 
++
+ var __jsx = react_default.a.createElement;
+ 
+-var H1 = function H1() {
++var components_H1 = function H1() {
+   console.log('>>>> H1 <<<<<');
+-  return __jsx("h1", null, "Hello!");
++  return /*#__PURE__*/_createRawReactElement("h1", {}, void 0, "Hello!");
+ };
+ var H2 = styled_components_browser_esm["a" /* default */].h2.withConfig({
+   displayName: "components__H2",
+@@ -1273,6 +1321,7 @@
+ // CONCATENATED MODULE: ./src/content.md
+ 
+ 
++
+ var content_jsx = react_default.a.createElement;
+ 
+ 
+@@ -1289,28 +1338,29 @@
+   return createElement(MDXLayout, extends_extends({}, layoutProps, props, {
+     components: components,
+     mdxType: "MDXLayout"
+-  }), createElement("h1", null, "Header 1"), createElement("h2", null, "Header 2"), createElement("h3", null, "Header 3"), createElement("p", null, createElement("a", extends_extends({
++  }), /*#__PURE__*/_createRawReactElement("h1", {}, void 0, "Header 1"), /*#__PURE__*/_createRawReactElement("h2", {}, void 0, "Header 2"), /*#__PURE__*/_createRawReactElement("h3", {}, void 0, "Header 3"), /*#__PURE__*/_createRawReactElement("p", {}, void 0, createElement("a", extends_extends({
+     parentName: "p"
+   }, {
+     "href": "http://example.com"
+-  }), "link")), createElement("blockquote", null, createElement("p", {
++  }), "link")), /*#__PURE__*/_createRawReactElement("blockquote", {}, void 0, /*#__PURE__*/_createRawReactElement("p", {
+     parentName: "blockquote"
+-  }, "This is a quote\nA multiline quote")), createElement("p", null, createElement("inlineCode", {
++  }, void 0, "This is a quote\nA multiline quote")), /*#__PURE__*/_createRawReactElement("p", {}, void 0, /*#__PURE__*/_createRawReactElement("inlineCode", {
+     parentName: "p"
+-  }, "some code")), createElement("pre", null, createElement("code", extends_extends({
++  }, void 0, "some code")), /*#__PURE__*/_createRawReactElement("pre", {}, void 0, createElement("code", extends_extends({
+     parentName: "pre"
+   }, {}), "// some pre\nexport default function Index() {\n    return <h1>Hello</h1>\n}\n")));
+ }
+ ;
+ MDXContent.isMDXComponent = true;
+ // CONCATENATED MODULE: ./src/pages/index.jsx
++
+ var pages_jsx = react_default.a.createElement;
+ 
+ 
+ 
+ 
+ var pages_components = {
+-  h1: H1,
++  h1: components_H1,
+   h2: H2,
+   h3: H3,
+   blockquote: Blockquote,
+@@ -1318,9 +1368,9 @@
+   a: LinkExternal
+ };
+ function Index() {
+-  return pages_jsx(esm_MDXProvider, {
++  return /*#__PURE__*/_createRawReactElement(esm_MDXProvider, {
+     components: pages_components
+-  }, pages_jsx(MDXContent, null));
++  }, void 0, /*#__PURE__*/_createRawReactElement(MDXContent, {}));
+ }
+ 
+ /***/ }),
