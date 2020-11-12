@@ -1,0 +1,76 @@
+--- compare/good/main.js	2020-11-12 11:00:53.749615788 +0100
++++ compare/bad/main.js	2020-11-12 11:01:21.337709788 +0100
+@@ -823,15 +823,19 @@
+ 
+ function components_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+ 
++var REACT_ELEMENT_TYPE;
++
++function _jsx(type, props, key, children) { if (!REACT_ELEMENT_TYPE) { REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol["for"] && Symbol["for"]("react.element") || 0xeac7; } var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = { children: void 0 }; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = new Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }
++
+ 
+ var style = {
+   color: '#6b61ff'
+ };
+-var components_H1 = function H1() {
++var H1 = function H1() {
+   console.log('>>>> H1 <<<<<');
+-  return /*#__PURE__*/react["createElement"]("h1", {
++  return /*#__PURE__*/_jsx("h1", {
+     style: style
+-  }, "Hello!");
++  }, void 0, "Hello!");
+ };
+ function LinkExternal(_ref) {
+   var href = _ref.href,
+@@ -848,6 +852,10 @@
+ // CONCATENATED MODULE: ./src/content.md
+ function content_extends() { content_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return content_extends.apply(this, arguments); }
+ 
++var content_REACT_ELEMENT_TYPE;
++
++function content_jsx(type, props, key, children) { if (!content_REACT_ELEMENT_TYPE) { content_REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol["for"] && Symbol["for"]("react.element") || 0xeac7; } var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = { children: void 0 }; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = new Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } return { $$typeof: content_REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }
++
+ function content_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = content_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+ 
+ function content_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+@@ -867,7 +875,7 @@
+   return createElement(MDXLayout, content_extends({}, layoutProps, props, {
+     components: components,
+     mdxType: "MDXLayout"
+-  }), createElement("h1", null, "Header 1"), createElement("p", null, createElement("a", content_extends({
++  }), /*#__PURE__*/content_jsx("h1", {}, void 0, "Header 1"), /*#__PURE__*/content_jsx("p", {}, void 0, createElement("a", content_extends({
+     parentName: "p"
+   }, {
+     "href": "http://example.com"
+@@ -876,21 +884,25 @@
+ ;
+ MDXContent.isMDXComponent = true;
+ // CONCATENATED MODULE: ./src/index.jsx
++var src_REACT_ELEMENT_TYPE;
++
++function src_jsx(type, props, key, children) { if (!src_REACT_ELEMENT_TYPE) { src_REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol["for"] && Symbol["for"]("react.element") || 0xeac7; } var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = { children: void 0 }; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = new Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } return { $$typeof: src_REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }
++
+ 
+ 
+ 
+ 
+ 
+ var src_components = {
+-  h1: components_H1,
++  h1: H1,
+   a: LinkExternal
+ };
+ function Index() {
+-  return /*#__PURE__*/react["createElement"](esm_MDXProvider, {
++  return /*#__PURE__*/src_jsx(esm_MDXProvider, {
+     components: src_components
+-  }, /*#__PURE__*/react["createElement"](MDXContent, null));
++  }, void 0, /*#__PURE__*/src_jsx(MDXContent, {}));
+ }
+-react_dom["render"]( /*#__PURE__*/react["createElement"](Index, null), document.getElementById('app'));
++react_dom["render"]( /*#__PURE__*/src_jsx(Index, {}), document.getElementById('app'));
+ 
+ /***/ })
+ /******/ ]);
+\ No newline at end of file

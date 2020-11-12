@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 const style = { color: '#6b61ff' }
 
 export const H1 = () => {
