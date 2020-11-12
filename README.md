@@ -1,6 +1,6 @@
 # repro-mdx-inline-elements
 
-Reproduces issue #TODO
+Reproduces issue [mdx-js/mdx#1327](https://github.com/mdx-js/mdx/issues/1327) "MDX is not compatible with @babel/plugin-transform-react-inline-elements".
 
 
 ### Subject of the issue
@@ -52,10 +52,10 @@ It's based on Next.js and also contains styled-components (but none of this matt
 
 The points of interest are:
 
- - `src/pages/index.jsx`
- - `src/components.jsx`
- - `src/content.md`
- - `babel.config.js`
+ - [`src/pages/index.jsx`](https://github.com/ivan-aksamentov/repro-mdx-inline-elements/blob/3e936c649a/src/pages/index.jsx)
+ - [`src/components.jsx`](https://github.com/ivan-aksamentov/repro-mdx-inline-elements/blob/3e936c649a/src/components.jsx)
+ - [`src/content.md`](https://github.com/ivan-aksamentov/repro-mdx-inline-elements/blob/3e936c649a6bb5fd51101fd5b706b6e730597aeb/src/content.md#L1)
+ - [`babel.config.js`](https://github.com/ivan-aksamentov/repro-mdx-inline-elements/blob/3e936c649a6bb5fd51101fd5b706b6e730597aeb/babel.config.js#L4)
 
 
 In order to reproduce the bug, run the production version of this app with:
@@ -128,13 +128,13 @@ I did the following experiment:
     cp -r .next/static/chunks/* compare/bad/
     ```
 
- - compared the results with webstorm:
+ - compared the resulting directories with webstorm:
 
     ```
     detach webstorm diff compare/{good,bad}
     ```
 
-the only difference seems to be in `pages/index.js`
+    the only difference seems to be in `pages/index.js`
 
  - generated a diff file for `pages/index.js`
 
@@ -145,15 +145,15 @@ the only difference seems to be in `pages/index.js`
  - one could also use `diff-so-fancy` to see the pretty diff in terminal:
 
     ```bash 
-     diff -u {good,bad}/pages/index.js | diff-so-fancy
+     diff -u compare/{good,bad}/pages/index.js | diff-so-fancy
     ```
 
-You can find the results in [`compare`]() directory, inluding the [`compare/index.js.diff`]()
+You can find the results in [`compare/`](https://github.com/ivan-aksamentov/repro-mdx-inline-elements/tree/3e936c649a6bb5fd51101fd5b706b6e730597aeb/compare), directory, inluding the [`compare/index.js.diff`](https://github.com/ivan-aksamentov/repro-mdx-inline-elements/blob/3e936c649a6bb5fd51101fd5b706b6e730597aeb/compare/index.js.diff)
 
 
 I was not able to make sense of the diff yet.
 
-Interestingly, the reason `LinkExternal` works seems to be the fact that it uses (renders) `children` props. Adding `children` to `H1` component also fixes the `h1` rendering. So props seems to be influencing the code optimizations in question. However, side effects, like `console.log()` don't seem to be preserved (notice how they are not printed during build) Sadly, this workaround will not work for styled components. 
+Unrelated to diff, but interestingly, the reason `LinkExternal` works seems to be the fact that it uses (renders) `children` props. Adding `children` to `H1` component also fixes the `h1` rendering. So props seems to be influencing the code optimizations in question. However, side effects, like `console.log()` don't seem to be preserved (notice how they are not printed during build) Sadly, this workaround will not work for styled components. 
 
 
 
